@@ -48,6 +48,18 @@ GameObject.prototype.destroy = function() {
   return `Object was removed from the game.`;
 };
 
+function CharacterStats(characterStatsArgs) {
+  GameObject.call(this, characterStatsArgs);
+  this.healthPoints = characterStatsArgs.healthPoints;
+  this.name = characterStatsArgs.name;
+}
+
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.destroy = function () {
+  return `${this.name} took damage.`;
+}
+
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 /*
