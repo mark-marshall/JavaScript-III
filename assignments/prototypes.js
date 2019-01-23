@@ -92,6 +92,22 @@ Villain.prototype.attack = function(object) {
   return (object.healthPoints -= 10);
 };
 
+Villain.prototype.lightSaber = function(object) {
+  return (object.healthPoints -= 30);
+};
+
+Villain.prototype.lightSaber = function(object) {
+  return (object.healthPoints -= 30);
+};
+
+Villain.prototype.deathStar = function(object) {
+  return (object.healthPoints -= 100);
+};
+
+Villain.prototype.revive = function() {
+  return (this.healthPoints += 200);
+};
+
 // Hero Constructor ============
 
 function Hero(heroArgs) {
@@ -103,6 +119,14 @@ Hero.prototype = Object.create(Humanoid.prototype);
 
 Hero.prototype.attack = function(object) {
   return (object.healthPoints -= 25);
+};
+
+Hero.prototype.mindControl = function(object) {
+  return (object.healthPoints -= 50);
+};
+
+Hero.prototype.revive = function() {
+  return (this.healthPoints += 200);
 };
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
@@ -196,11 +220,23 @@ console.log(darth.greet());
 console.log(darth.takeDamage());
 console.log(yoda.greet());
 
-// Testing Hero and Villain attack functions ============
+// Testing Hero and Villain attack methods ============
 yoda.attack(darth);
 yoda.attack(darth);
-
 console.log(darth);
+
+// Testing Hero and Villain expanded methods ============
+yoda.mindControl(darth);
+console.log(darth);
+yoda.revive();
+yoda.revive();
+yoda.revive();
+console.log(yoda);
+darth.revive();
+darth.revive();
+console.log(darth);
+darth.deathStar(yoda);
+console.log(yoda);
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
