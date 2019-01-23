@@ -84,6 +84,7 @@ Humanoid.prototype.greet = function() {
 function Villain(villainArgs) {
   Humanoid.call(this, villainArgs);
   this.side = villainArgs.side;
+  this.alive = true;
 }
 
 Villain.prototype = Object.create(Humanoid.prototype);
@@ -93,6 +94,7 @@ Villain.prototype.attack = function(object, multiplier = 0) {
   console.log(`Your victim has ${object.healthPoints} left`);
   if (object.healthPoints < 0) {
     console.log("Your victim is dead!!");
+    object.alive = false;
   }
 };
 
@@ -101,6 +103,7 @@ Villain.prototype.lightSaber = function(object, multiplier = 0) {
   console.log(`Your victim has ${object.healthPoints} left`);
   if (object.healthPoints < 0) {
     console.log("Your victim is dead!!");
+    object.alive = false;
   }
 };
 
@@ -109,6 +112,7 @@ Villain.prototype.deathStar = function(object, multiplier = 0) {
   console.log(`Your victim has ${object.healthPoints} left`);
   if (object.healthPoints < 0) {
     console.log("Your victim is dead!!");
+    object.alive = false;
   }
 };
 
@@ -122,6 +126,7 @@ Villain.prototype.revive = function() {
 function Hero(heroArgs) {
   Humanoid.call(this, heroArgs);
   this.side = heroArgs.side;
+  this.alive = true;
 }
 
 Hero.prototype = Object.create(Humanoid.prototype);
@@ -131,6 +136,7 @@ Hero.prototype.attack = function(object, multiplier = 0) {
   console.log(`Your victim has ${object.healthPoints} left`);
   if (object.healthPoints < 0) {
     console.log("Your victim is dead!!");
+    object.alive = false;
   }
 };
 
@@ -139,6 +145,7 @@ Hero.prototype.mindControl = function(object, multiplier = 0) {
   console.log(`Your victim has ${object.healthPoints} left`);
   if (object.healthPoints < 0) {
     console.log("Your victim is dead!!");
+    object.alive = false;
   }
 };
 
@@ -261,6 +268,11 @@ console.log(darth);
 
 yoda.attack(darth);
 yoda.revive();
+
+// Testing character death status ☠️ ============
+
+yoda.mindControl(darth, 10000);
+console.log(darth);
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
