@@ -88,20 +88,20 @@ function Villain(villainArgs) {
 
 Villain.prototype = Object.create(Humanoid.prototype);
 
-Villain.prototype.attack = function(object) {
-  return (object.healthPoints -= 10);
+Villain.prototype.attack = function(object, multiplier = 0) {
+  return (object.healthPoints -= 10 * multiplier);
 };
 
-Villain.prototype.lightSaber = function(object) {
-  return (object.healthPoints -= 30);
+Villain.prototype.lightSaber = function(object, multiplier = 0) {
+  return (object.healthPoints -= 30 * multiplier);
 };
 
-Villain.prototype.lightSaber = function(object) {
-  return (object.healthPoints -= 30);
+Villain.prototype.lightSaber = function(object, multiplier = 0) {
+  return (object.healthPoints -= 30 * multiplier);
 };
 
-Villain.prototype.deathStar = function(object) {
-  return (object.healthPoints -= 100);
+Villain.prototype.deathStar = function(object, multiplier = 0) {
+  return (object.healthPoints -= 100 * multiplier);
 };
 
 Villain.prototype.revive = function() {
@@ -117,12 +117,12 @@ function Hero(heroArgs) {
 
 Hero.prototype = Object.create(Humanoid.prototype);
 
-Hero.prototype.attack = function(object) {
-  return (object.healthPoints -= 25);
+Hero.prototype.attack = function(object, multiplier = 0) {
+  return (object.healthPoints -= 25 * multiplier);
 };
 
-Hero.prototype.mindControl = function(object) {
-  return (object.healthPoints -= 50);
+Hero.prototype.mindControl = function(object, multiplier = 0) {
+  return (object.healthPoints -= 50 * multiplier);
 };
 
 Hero.prototype.revive = function() {
@@ -237,6 +237,10 @@ darth.revive();
 console.log(darth);
 darth.deathStar(yoda);
 console.log(yoda);
+
+// Testing Hero and Villain expanded methods with multipliers ============
+yoda.mindControl(darth, 100);
+console.log(darth);
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
