@@ -88,6 +88,10 @@ function Villain(villainArgs) {
 
 Villain.prototype = Object.create(Humanoid.prototype);
 
+Villain.prototype.attack = function(object) {
+  return (object.healthPoints -= 10);
+};
+
 // Hero Constructor ============
 
 function Hero(heroArgs) {
@@ -96,6 +100,10 @@ function Hero(heroArgs) {
 }
 
 Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.attack = function(object) {
+  return (object.healthPoints -= 25);
+};
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
@@ -171,6 +179,7 @@ const yoda = new Hero({
   side: "Not Dark"
 });
 
+// Testing MVP constructor functions ============
 console.log(mage.createdAt); // Today's date
 console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
 console.log(swordsman.healthPoints); // 15
@@ -181,9 +190,17 @@ console.log(archer.language); // Elvish
 console.log(archer.greet()); // Lilith offers a greeting in Elvish.
 console.log(mage.takeDamage()); // Bruce took damage.
 console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+
+// Testing Hero and Villain constructor functions ============
 console.log(darth.greet());
 console.log(darth.takeDamage());
 console.log(yoda.greet());
+
+// Testing Hero and Villain attack functions ============
+yoda.attack(darth);
+yoda.attack(darth);
+
+console.log(darth);
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
