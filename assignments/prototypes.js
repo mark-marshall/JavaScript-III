@@ -89,23 +89,32 @@ function Villain(villainArgs) {
 Villain.prototype = Object.create(Humanoid.prototype);
 
 Villain.prototype.attack = function(object, multiplier = 0) {
-  return (object.healthPoints -= 10 * multiplier);
+  object.healthPoints -= 10 * multiplier;
+  console.log(`Your victim has ${object.healthPoints} left`);
+  if (object.healthPoints < 0) {
+    console.log("Your victim is dead!!");
+  }
 };
 
 Villain.prototype.lightSaber = function(object, multiplier = 0) {
-  return (object.healthPoints -= 30 * multiplier);
-};
-
-Villain.prototype.lightSaber = function(object, multiplier = 0) {
-  return (object.healthPoints -= 30 * multiplier);
+  object.healthPoints -= 30 * multiplier;
+  console.log(`Your victim has ${object.healthPoints} left`);
+  if (object.healthPoints < 0) {
+    console.log("Your victim is dead!!");
+  }
 };
 
 Villain.prototype.deathStar = function(object, multiplier = 0) {
-  return (object.healthPoints -= 100 * multiplier);
+  object.healthPoints -= 100 * multiplier;
+  console.log(`Your victim has ${object.healthPoints} left`);
+  if (object.healthPoints < 0) {
+    console.log("Your victim is dead!!");
+  }
 };
 
 Villain.prototype.revive = function() {
-  return (this.healthPoints += 200);
+  this.healthPoints += 200;
+  console.log(`You now have ${this.healthPoints}❤️`);
 };
 
 // Hero Constructor ============
@@ -118,15 +127,24 @@ function Hero(heroArgs) {
 Hero.prototype = Object.create(Humanoid.prototype);
 
 Hero.prototype.attack = function(object, multiplier = 0) {
-  return (object.healthPoints -= 25 * multiplier);
+  object.healthPoints -= 25 * multiplier;
+  console.log(`Your victim has ${object.healthPoints} left`);
+  if (object.healthPoints < 0) {
+    console.log("Your victim is dead!!");
+  }
 };
 
 Hero.prototype.mindControl = function(object, multiplier = 0) {
-  return (object.healthPoints -= 50 * multiplier);
+  object.healthPoints -= 50 * multiplier;
+  console.log(`Your victim has ${object.healthPoints} left`);
+  if (object.healthPoints < 0) {
+    console.log("Your victim is dead!!");
+  }
 };
 
 Hero.prototype.revive = function() {
-  return (this.healthPoints += 200);
+  this.healthPoints += 200;
+  console.log(`You now have ${this.healthPoints}❤️`);
 };
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
@@ -229,10 +247,7 @@ console.log(darth);
 yoda.mindControl(darth);
 console.log(darth);
 yoda.revive();
-yoda.revive();
-yoda.revive();
 console.log(yoda);
-darth.revive();
 darth.revive();
 console.log(darth);
 darth.deathStar(yoda);
@@ -241,6 +256,11 @@ console.log(yoda);
 // Testing Hero and Villain expanded methods with multipliers ============
 yoda.mindControl(darth, 100);
 console.log(darth);
+
+// Testing mesages on Hero and Villain expanded methods ============
+
+yoda.attack(darth);
+yoda.revive();
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
