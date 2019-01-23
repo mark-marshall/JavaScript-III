@@ -39,6 +39,8 @@
  * Instances of CharacterStats should have all of the same properties as GameObject.
  */
 
+// Game Object Constructor ============
+
 function GameObject(gameObjectArgs) {
   this.createdAt = gameObjectArgs.createdAt;
   this.dimensions = gameObjectArgs.dimensions;
@@ -47,6 +49,8 @@ function GameObject(gameObjectArgs) {
 GameObject.prototype.destroy = function() {
   return `${this.name} was removed from the game.`;
 };
+
+// Character Stats Constructor ============
 
 function CharacterStats(characterStatsArgs) {
   GameObject.call(this, characterStatsArgs);
@@ -60,6 +64,8 @@ CharacterStats.prototype.takeDamage = function() {
   return `${this.name} took damage.`;
 };
 
+// Humanoid Constructor ============
+
 function Humanoid(humanoidArgs) {
   CharacterStats.call(this, humanoidArgs);
   this.team = humanoidArgs.team;
@@ -72,6 +78,24 @@ Humanoid.prototype = Object.create(CharacterStats.prototype);
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}`;
 };
+
+// Villain Constructor ============
+
+function Villain(villainArgs) {
+  Humanoid.call(this, villainArgs);
+  this.side = villainArgs.side;
+}
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+// Hero Constructor ============
+
+function Hero(heroArgs) {
+  Humanoid.call(this, heroArgs);
+  this.side = heroArgs.side;
+}
+
+Hero.prototype = Object.create(Humanoid.prototype);
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
@@ -117,6 +141,36 @@ const archer = new Humanoid({
   language: "Elvish"
 });
 
+const darth = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 1,
+    height: 10
+  },
+  healthPoints: 200,
+  name: "Darth",
+  team: "None",
+  weapons: ["Lightsaber", "Stormtroopers"],
+  language: "English",
+  side: "Dark"
+});
+
+const yoda = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 1,
+    height: -2
+  },
+  healthPoints: 1000,
+  name: "Yoda",
+  team: "Jedi",
+  weapons: ["Wisdom"],
+  language: "Yodish",
+  side: "Not Dark"
+});
+
 console.log(mage.createdAt); // Today's date
 console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
 console.log(swordsman.healthPoints); // 15
@@ -127,6 +181,9 @@ console.log(archer.language); // Elvish
 console.log(archer.greet()); // Lilith offers a greeting in Elvish.
 console.log(mage.takeDamage()); // Bruce took damage.
 console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+console.log(darth.greet());
+console.log(darth.takeDamage());
+console.log(yoda.greet());
 
 // Stretch task:
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
